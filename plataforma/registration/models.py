@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from datetime import datetime
 
 from companies.models import Company, Occupation
 
@@ -25,6 +26,7 @@ class Profile(models.Model):
     link = models.URLField(max_length=200, null=True, blank=True)
     birthday = models.DateTimeField(verbose_name="Cumpleaños", default=datetime.now, null=True, blank=True)
     access = models.CharField(max_length=12,choices=ACCESS_CHOICES,default='collaborator',)
+    balance = models.FloatField(verbose_name="Valor", null=False, blank=False)
     
     class Meta:
         ordering = ['user__username']

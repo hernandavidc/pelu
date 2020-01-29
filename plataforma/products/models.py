@@ -19,8 +19,8 @@ class Product(models.Model):
         return self.name
 
 class ProfitProduct(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="getProficts")
-    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name="getProficts")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="getUserProficts")
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name="getProductProficts")
     profit = models.FloatField(verbose_name="Valor", null=False, blank=False)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
