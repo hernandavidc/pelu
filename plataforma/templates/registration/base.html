@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/base/vendor.bundle.base.css' %}" rel="stylesheet">
+    <link href="{% static 'plataforma/css/style.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'plataforma/images/favicon.png' %}" />
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="main-panel">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+          <div class="row w-100 mx-0">
+            <div class="col-lg-4 mx-auto">
+              <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                <div class="brand-logo row">
+                    <div class="col-sm-5">
+                        <img src="{% static 'plataforma/images/logo.png' %}" alt="logo">
+                    </div>
+                    <div class="col-sm-7">
+                            {% block progress %}{% endblock %}
+                    </div>
+                </div>
+                {% block content %}{% endblock %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    {% block js %}{% endblock %}
+</body>
+
+</html>

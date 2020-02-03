@@ -1,11 +1,56 @@
-from .forms import UserCreationFormWithEmail, ProfileForm, EmailForm
 from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView
+from django.views import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
 from django import forms
+
+from django.contrib.auth.models import User
+from companies.models import Company, Occupation
+from .forms import UserCreationFormWithEmail, ProfileForm, EmailForm
 from .models import Profile
+
+class SignupCompanyView(View):
+    template_name = 'registration/signupCompany.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        print(str(request.POST))
+        name = request.POST['companyName']
+        direction = request.POST['companyDirection']
+        contactNumber = request.POST['companyContactNumbre']
+        try:
+            company = Company.objects.create(name=name,direction=direction,contactNumber=contactNumber)
+        
+            first_name = request.POST['companyManagerName']
+            last_name = request.POST['companyManagerLastName']
+            cc = request.POST['cc']
+            username = request.POST['username']
+            email = request.POST['email']
+            password1 = request.POST['password1']
+            password2 = request.POST['password2']
+
+            if (password1==password2):
+                company.save()
+                user = User.objects.create_user(username, email, password2)
+                user.first_name = first_name
+                user.last_name = last_name
+                occupation, created = Occupation.objects.get_or_create(name='administrador',)
+                profile = Profile.objects.create(user=user,company=company,occupation=occupation,cc=cc,access = 'admin')
+                profile.save()
+                user.profile = profile
+                user.save()
+            else:
+                company.delete()
+                raise forms.ValidationError("Las contraseñas deben ser iguales")
+        except Exception as e:
+            print(e)
+            return render(request, self.template_name)
+        return redirect(reverse_lazy('login') + '?register')
 
 class SignupView(CreateView):
     form_class = UserCreationFormWithEmail

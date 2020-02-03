@@ -1,0 +1,77 @@
+{% extends 'registration/base.html' %}
+{% load static %} 
+{% block title %}Registro empresa | 33%{% endblock %} 
+{% block progress %}
+<div class="progress mx-auto" style="margin-top: 1.5rem;">
+  <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 10%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+{% endblock %}
+{% block content %}
+    <h4>Empecemos creando un perfil a su empresa</h4>
+    <small>Los campos con * son requeridos</small>
+    <form class="pt-3" action="" method="post">{% csrf_token %}
+        {% if form.non_field_errors %}
+            <p style="color:red">Datos incorrectos, prueba de nuevo.</p>
+        {% endif %}
+        <div id="fristStep" class="multi-collapse collapse show">
+            <div class="form-group">
+                <input type="text" name="companyName" autofocus maxlength="254" required id="id_companyName" class="form-control form-control-lg" placeholder="Nombre de la empresa*" />
+            </div>
+            <div class="form-group">
+                <input type="text" name="companyDirection" id="id_companyDirection" class="form-control form-control-lg" placeholder="Dirección de la empresa" />
+            </div>
+            <div class="form-group">
+                <input type="text" name="companyContactNumbre" id="id_companyContactNumbre" class="form-control form-control-lg" placeholder="Numero de contacto" />
+            </div>
+            <div class="form-group">
+                <input type="text" name="companyManagerName" id="id_companyManagerName" class="form-control form-control-lg" placeholder="Su nombre" />
+            </div>
+            <div class="form-group">
+                <input type="text" name="companyManagerLastName" id="id_companyManagerLastName" class="form-control form-control-lg" placeholder="Su Apellido" />
+                <small>- Usted sera considerano nuestro primer contacto como representante de la empresa</small>
+            </div>
+            <div class="mt-3">
+                <a class="btn btn-block btn-primary btn-sm font-weight-medium auth-form-btn disabled" id="toSecondStep" href="" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="fristStep secondStep">Siguiente</a>
+            </div>
+        </div>
+        <div id="secondStep" class="multi-collapse collapse">
+            <div class="form-group">
+                <input type="text" name="username" class="form-control mb-2" placeholder="Nombre de usuario*" required="" id="id_username"> <span class="helptext">150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_ </span>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" class="form-control mb-2" placeholder="Dirección email*" required id="id_email"> <span class="helptext">254 caracteres como máximo y debe ser valido</span>
+            </div>
+            <div class="form-group">
+                <input type="number" name="cc" min="0" class="form-control mb-2" placeholder="Cédula*" required id="id_cc"> <span class="helptext">Debe ser unica</span>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password1" class="form-control mb-2" placeholder="Contraseña*" required id="id_password1"> <span class="helptext"><ul><li>Su contraseña no puede ser muy similar a su información personal.</li><li>Su contraseña debe contener al menos 8 caracteres.</li><li>Su contraseña debe ser alfanumerica.</li></ul></span>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password2" class="form-control mb-2" placeholder="Repite la Contraseña*" required id="id_password2"> <span class="helptext">Para verificar, introduzca la misma contraseña anterior.</span>
+            </div>
+            <div class="mt-3">
+                <input type="submit" class="btn btn-primary btn-block font-weight-medium auth-form-btn" value="Aceptar"> 
+                <a class="btn btn-block btn-secondary btn-sm font-weight-small auth-form-btn" href="" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="fristStep secondStep">Volver</a>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'vendors/jquery/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendors/bootstrap/js/collapse.js' %}"></script>
+<script>
+    $( "#id_companyName" ).keyup(function() {
+        console.log(this.value.length)
+        if(this.value.length > 1){$("#toSecondStep").removeClass('disabled');}
+        else{$("#toSecondStep").addClass('disabled');}
+    });
+    $("#toSecondStep").click(function(){
+        $("#progress-bar")[0].style.width = "55%";
+    });
+</script>
+{% endblock %}

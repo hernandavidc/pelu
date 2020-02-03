@@ -24,19 +24,15 @@ class Profile(models.Model):
     bio = models.TextField(null=True, blank=True)
     cc = models.PositiveIntegerField(unique=True,verbose_name="Cédula",null=True, blank=True, error_messages={'unique':"Esta cedula ya tiene vinculada una cuenta."})
     link = models.URLField(max_length=200, null=True, blank=True)
-    birthday = models.DateTimeField(verbose_name="Cumpleaños", default=datetime.now, null=True, blank=True)
+    birthday = models.DateTimeField(verbose_name="Cumpleaños", null=True, blank=True)
     access = models.CharField(max_length=12,choices=ACCESS_CHOICES,default='collaborator',)
-    balance = models.FloatField(verbose_name="Valor", null=False, blank=False)
-    
+    balance = models.FloatField(verbose_name="Valor", default=0, null=False, blank=False)
+
     class Meta:
         ordering = ['user__username']
 
     def __str__(self):
-        return self.cc + ' ' + self.user.username
+        return str(self.cc) + ' ' + self.user.username
 
-@receiver(post_save, sender=User)
-def ensure_profile_exists(sender, instance, **kwargs):
-    if kwargs.get('created', False):
-        Profile.objects.get_or_create(user=instance)
 
 
