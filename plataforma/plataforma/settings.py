@@ -83,6 +83,10 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'registration.backends.EmailOrUsernameModelBackend', # our custom authentication backend
+    'django.contrib.auth.backends.ModelBackend',
+    )
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -123,7 +127,7 @@ STATICFILES_DIRS = (normpath(join(BASE_DIR, 'static')),)
 
 #auth redirect
 LOGIN_URL='login'
-LOGIN_REDIRECT_URL = 'products:dashboard'
+LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 
 #Media Files

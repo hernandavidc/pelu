@@ -1,15 +1,17 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
 
 from profiles.urls import profiles_patterns
-
-from django.conf import settings
+from .views import HomePageView, DashboardPageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
     path('', include('registration.urls')),
     path('', include(profiles_patterns)),
+    path('', HomePageView.as_view(), name='index'),
+    path('inicio', DashboardPageView.as_view(), name='dashboard'),
 ]
 
 if settings.DEBUG:

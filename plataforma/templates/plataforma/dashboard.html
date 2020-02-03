@@ -1,0 +1,121 @@
+{% extends 'plataforma/base.html' %}
+{% load static %}
+{% block title %} - ¡Bienvenido!{% endblock %}
+{% block content %}
+<div class="row mt-4">
+    <div class="col-lg-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <h4 class="card-title">Sales Difference</h4>
+                        <canvas id="salesDifference" style="display: block; height: 144px; width: 288px;" width="360" height="180" class="chartjs-render-monitor"></canvas>
+                        <p class="mt-3 mb-4 mb-lg-0">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit.
+                        </p>
+                    </div>
+                    <div class="col-lg-5">
+                        <h4 class="card-title">Best Sellers</h4>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <ul class="graphl-legend-rectangle">
+                                    <li><span class="bg-danger"></span>Automotive</li>
+                                    <li><span class="bg-warning"></span>Books</li>
+                                    <li><span class="bg-info"></span>Software</li>
+                                    <li><span class="bg-success"></span>Video games</li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-8 grid-margin"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                <canvas id="bestSellers" width="293" height="146" class="chartjs-render-monitor" style="display: block; height: 117px; width: 235px;"></canvas>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-4 mb-lg-0">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit.
+                        </p>
+                    </div>
+                    <div class="col-lg-3">
+                        <h4 class="card-title">Social Media Statistics</h4>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="progress progress-lg grouped mb-2">
+                                    <div class="progress-bar  bg-danger" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <ul class="graphl-legend-rectangle">
+                                    <li><span class="bg-danger"></span>Instagram (15%)</li>
+                                    <li><span class="bg-warning"></span>Facebook (20%)</li>
+                                    <li><span class="bg-info"></span>Website (25%)</li>
+                                    <li><span class="bg-success"></span>Youtube (40%)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mb-0 mt-2">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mb-3 mb-lg-0">
+        <div class="card congratulation-bg text-center">
+            <div class="card-body pb-0">
+                <img src="images/dashboard/face29.png" alt="">  
+                <h2 class="mt-3 text-white mb-3 font-weight-bold">Congratulations
+                    Johnson
+                </h2>
+                <p>You have done 57.6% more sales today. 
+                    Check your new badge in your profile.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 flex-column d-flex stretch-card">
+        <div class="row">
+            <div class="col-lg-3 d-flex grid-margin stretch-card">
+                <div class="card sale-diffrence-border">
+                    <div class="card-body">
+                        <h2 class="text-dark mb-2 font-weight-bold">$6475</h2>
+                        <h4 class="card-title mb-2">Sales Difference</h4>
+                        <small class="text-muted">APRIL 2019</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 d-flex grid-margin stretch-card">
+                <div class="card sale-warning-border">
+                    <div class="card-body">
+                        <h2 class="text-dark mb-2 font-weight-bold">$6475</h2>
+                        <h4 class="card-title mb-2">Sales Difference</h4>
+                        <small class="text-muted">APRIL 2019</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 d-flex grid-margin stretch-card">
+                <div class="card sale-visit-statistics-border">
+                    <div class="card-body">
+                        <h2 class="text-dark mb-2 font-weight-bold">$3479</h2>
+                        <h4 class="card-title mb-2">Visit Statistics</h4>
+                        <small class="text-muted">APRIL 2019</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 d-flex grid-margin stretch-card">
+                <div class="card sale-danger-border">
+                    <div class="card-body">
+                        <h2 class="text-dark mb-2 font-weight-bold">$3479</h2>
+                        <h4 class="card-title mb-2">Visit Statistics</h4>
+                        <small class="text-muted">APRIL 2019</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

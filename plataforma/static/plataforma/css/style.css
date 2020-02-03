@@ -19742,6 +19742,29 @@ code {
     bottom: 0;
 }
 
+.sale-danger-border:after {
+    content: '';
+    height: 5px;
+    width: 100%;
+    border-radius: 0 0 6px 6px;
+    background-color: #ee5b5b;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.sale-warning-border:after {
+    content: '';
+    height: 5px;
+    width: 100%;
+    border-radius: 0 0 6px 6px;
+    background-color: #fcd53b;
+    ;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
 .sale-visit-statistics-border:after {
     content: '';
     height: 5px;
