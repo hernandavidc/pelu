@@ -15,6 +15,9 @@ from .models import Profile
 class SignupCompanyView(View):
     template_name = 'registration/signupCompany.html'
 
+    def get_success_url(self):
+        return reverse_lazy('login') + '?register'
+
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
 

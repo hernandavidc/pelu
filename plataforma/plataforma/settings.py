@@ -14,7 +14,7 @@ SECRET_KEY = '2#&-08wqa2$6xzf=a3go$(6#jv@f7zs+3&55na==v(=a=#tsm1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 DJANGO_APPS = [
@@ -31,10 +31,10 @@ LOCAL_APPS = [
     'plataforma',
     'companies',
     'registration',
-    'profiles',
     'products',
     'payments',
     'sales',
+    'profiles',
 ]
 
 THIRD_PARTY_APPS = [
