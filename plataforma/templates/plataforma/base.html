@@ -4,92 +4,17 @@
     <title>Name {% block title %}{% endblock %}</title>
     {% load static %}
     <!-- base:css -->
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendors/base/vendor.bundle.base.css' %}">
     <link rel="stylesheet" href="{% static 'plataforma/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'plataforma/css/extra.css' %}">
     <link rel="shortcut icon" href="images/favicon.png">
     {% block stylesBlock %}{% endblock %}
   <style type="text/css">/* Chart.js */
-@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
+    @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
   <body>
     <div class="container-scroller">
-		<!-- partial:partials/_horizontal-navbar.html -->
-        <div class="horizontal-menu">
-        <nav class="bottom-navbar">
-            <div class="container">
-                <ul class="nav page-navigation">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
-                    <i class="mdi mdi-file-document-box menu-icon"></i>
-                    <span class="menu-title">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="mdi mdi-cube-outline menu-icon"></i>
-                        <span class="menu-title">UI Elements</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="submenu">
-                        <ul>
-                            <li class="nav-item"><a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/forms/basic_elements.html" class="nav-link">
-                        <i class="mdi mdi-chart-areaspline menu-icon"></i>
-                        <span class="menu-title">Form Elements</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/charts/chartjs.html" class="nav-link">
-                        <i class="mdi mdi-finance menu-icon"></i>
-                        <span class="menu-title">Charts</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/tables/basic-table.html" class="nav-link">
-                        <i class="mdi mdi-grid menu-icon"></i>
-                        <span class="menu-title">Tables</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/icons/mdi.html" class="nav-link">
-                        <i class="mdi mdi-emoticon menu-icon"></i>
-                        <span class="menu-title">Icons</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="mdi mdi-codepen menu-icon"></i>
-                        <span class="menu-title">Sample Pages</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="submenu">
-                        <ul class="submenu-item">
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/login-2.html">Login 2</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/register.html">Register</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/register-2.html">Register 2</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/lock-screen.html">Lockscreen</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="docs/documentation.html" class="nav-link">
-                        <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                        <span class="menu-title">Documentation</span></a>
-                </li>
-                </ul>
-            </div>
-        </nav>
-        </div>
+        {% include "plataforma/menu.html" %}
         <div class="container-fluid page-body-wrapper">
             <div class="main-panel">
                     <div class="content-wrapper">

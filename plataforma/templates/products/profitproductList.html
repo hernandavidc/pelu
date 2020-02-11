@@ -1,6 +1,9 @@
 {% extends 'plataforma/base.html' %}
 {% load static %}
 {% block title %} - Beneficio por producto{% endblock %}
+{% block stylesBlock %}
+<link rel="stylesheet" href="{% static 'vendors/bootstrap/css/dataTables.bootstrap.min.css' %}">
+{% endblock %}
 {% block content %}
 
 <div class="row">
@@ -9,7 +12,7 @@
             Crear beneficio por producto
         </button>
     </div>
-    <div class="col-sm-6 col-md-4 row">
+    <div class="col-sm-6 col-md-5 row">
         <div class="col-sm-12 col-md-3">
             <h5>Producto selecionado:</h5>
         </div>
@@ -25,7 +28,7 @@
             <a id="goToProductProfits" href="#" disabled><p style="font-size: 2rem;" class="mt-1"> <i class="mdi mdi-arrow-right-drop-circle"></i></p></a>
         </div>
     </div>
-    <div class="col-sm-12 col-md-6">
+    <div class="col-sm-12 col-md-5">
         {% if 'register' in request.GET  %}
             <div class="alert alert-success" role="alert">
                 El producto se registro correctamente
@@ -91,7 +94,7 @@
             <h4 class="card-title">Los beneficios de {{request.user.profile.company.name}}</h4>
             <div class="table-responsive pt-3">
                 {% if profitproductList %}
-                    <table class="table table-bordered table-hover">
+                    <table id="dataTable" class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -133,14 +136,25 @@
 {% endblock %}
 
 {% block Js %}
+    <script src="{% static 'vendors/jquery/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendors/jquery/dataTables.bootstrap.min.js' %}"></script>
 <script>
-    $('#selectFilter').change(function(){ 
-        let value = $(this).val();
-        let url = "{% url 'products:profitsListAndCreate' %}";
-        if(value != ""){
-            url += "?id="+value
-        }
-        $("#goToProductProfits").attr("href", url)
-    });
+    $(document).ready(function() {
+        
+        $('#selectFilter').change(function(){ 
+            let value = $(this).val();
+            let url = "{% url 'products:profitsListAndCreate' %}";
+            if(value != ""){
+                url += "?id="+value
+            }
+            $("#goToProductProfits").attr("href", url)
+        });
+
+        $('#dataTable').DataTable( {
+            "language": {
+                "url": "{% static 'vendors/jquery/Spanish.json' %}"
+            }
+        } );
+    } );
 </script>
 {% endblock %}

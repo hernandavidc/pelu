@@ -1,6 +1,9 @@
 {% extends 'plataforma/base.html' %}
 {% load static %}
 {% block title %} - Productos{% endblock %}
+{% block stylesBlock %}
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap/css/dataTables.bootstrap.min.css' %}">
+{% endblock %}
 {% block content %}
 
 <div class="row">
@@ -58,7 +61,7 @@
             <h4 class="card-title">Los productos de {{request.user.profile.company.name}}</h4>
             <div class="table-responsive pt-3">
                 {% if productList %}
-                    <table class="table table-bordered table-hover">
+                    <table id="dataTable" class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -75,7 +78,14 @@
                                 <td>{{ product.name }}</td>
                                 <td>{{ product.description }}</td>
                                 <td>{{ product.value }}</td>
-                                <td><p style="text-align:center;"><a href="#"><i class="fa fa-eye"></i></a></p> </td>
+                                <td>
+                                    <p style="text-align:center;">
+                                        <a href="{% url 'products:update' product.id %}"><i class="mdi mdi-grease-pencil"></i></a>
+                                        <a href="{% url 'products:profitsListAndCreate' %}?id={{product.id}}">
+                                            <i class="mdi mdi-step-forward"></i>
+                                        </a>
+                                    </p> 
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -91,4 +101,18 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block Js %}
+    <script src="{% static 'vendors/jquery/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendors/jquery/dataTables.bootstrap.min.js' %}"></script>
+<script>   
+    $(document).ready(function() {
+        $('#dataTable').DataTable( {
+            "language": {
+                "url": "{% static 'vendors/jquery/Spanish.json' %}"
+            }
+        } );
+    } );
+</script>
 {% endblock %}

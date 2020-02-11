@@ -1,0 +1,7 @@
+div.table-responsive>div.dataTables_wrapper>div.row {
+    width: 100%;
+}
+
+li.paginate_button {
+    margin: 0 5px;
+}
