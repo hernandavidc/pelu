@@ -26,6 +26,7 @@ class ProfitProduct(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 
     class Meta:
+        unique_together = (("user", "product"),)
         verbose_name = "Beneficio por producto"
         verbose_name_plural = "Beneficios por producto"
 

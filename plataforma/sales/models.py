@@ -11,6 +11,7 @@ class Sale(models.Model):
     buyerContact = models.CharField(verbose_name="Número de contacto", max_length=15, null=True, blank=True)
     discount = models.FloatField(verbose_name="Descuento sobre la factura", default=0)
     tax = models.FloatField(verbose_name="Impuesto", default=0)
+    total = models.FloatField(verbose_name="Total", default=0, null=False, blank=False)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 
@@ -19,10 +20,10 @@ class Sale(models.Model):
         verbose_name_plural = "Ventas"
 
     def __str__(self):
-        return str(self.id)+" "+str(self.date)+" "+str(self.saleManager)
+        return str(self.id)+" "+str(self.saleManager)
 
 class SaleDetail(models.Model):
-    sale = models.ForeignKey(Sale, related_name="get_details", on_delete=models.PROTECT)
+    sale = models.ForeignKey(Sale, related_name="get_details", on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name="get_details_sale", on_delete=models.PROTECT)
     amount = models.FloatField(verbose_name="Cantidad", null=False, blank=False)
     costPerUnit = models.FloatField(verbose_name="Valor unitario", null=False, blank=False)

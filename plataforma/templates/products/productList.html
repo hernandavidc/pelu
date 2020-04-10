@@ -1,11 +1,11 @@
 {% extends 'plataforma/base.html' %}
-{% load static %}
-{% block title %} - Productos{% endblock %}
+{% load static %} 
+{% block title %} - Productos{% endblock %} 
 {% block stylesBlock %}
-    <link rel="stylesheet" href="{% static 'vendors/bootstrap/css/dataTables.bootstrap.min.css' %}">
-{% endblock %}
-{% block content %}
+<link rel="stylesheet" href="{% static 'vendors/bootstrap/css/dataTables.bootstrap.min.css' %}"> 
+{% endblock %} 
 
+{% block content %}
 <div class="row">
     <div class="col-sm-12 col-md-4">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createProductModal">
@@ -13,54 +13,74 @@
         </button>
     </div>
     <div class="col-sm-12 col-md-8">
-        {% if 'register' in request.GET  %}
-            <div class="alert alert-success" role="alert">
-                El producto se registro correctamente
-            </div>
+        {% if 'register' in request.GET %}
+        <div class="alert alert-success" role="alert">
+            El producto se registro correctamente
+        </div>
         {% elif 'error' in request.GET %}
-            <div class="alert alert-danger" role="alert">
-                Error al registrar el producto
-            </div>
+        <div class="alert alert-danger" role="alert">
+            Error al registrar el producto
+        </div>
         {% endif %}
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal create -->
 <div class="modal fade" id="createProductModal" tabindex="-1" role="dialog" aria-labelledby="createProductModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="createProductModalLabel">Agregar producto</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createProductModalLabel">Agregar producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
-        </div>
-        <form action="" method="post">{% csrf_token %}
-            <div class="modal-body">
-                {% for field in form %}
+            </div>
+            <form action="" method="post">{% csrf_token %}
+                <div class="modal-body">
+                    {% for field in form %}
                     <div class="form-group">
-                        <label class="mylabel">{{ field.label }}</label>
-                        {{ field }}
+                        <label class="mylabel">{{ field.label }}</label> {{ field }}
                     </div>
-                {% endfor %}
-                <small class="mt-2">Los campos con * son requeridos</small>
+                    {% endfor %}
+                    <small class="mt-2">Los campos con * son requeridos</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Crear producto">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal delete -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createProductModalLabel">Confirmar eliminar producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Esta proximo a eliminar un producto, este procedimiento es irreversible.</p>
+                <p>¿Seguro que desea proceder?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="submit" class="btn btn-primary" value="Crear producto">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-danger btn-ok">Eliminar</a>
             </div>
-        </form>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="row mt-4">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Los productos de {{request.user.profile.company.name}}</h4>
-            <div class="table-responsive pt-3">
-                {% if productList %}
+            <div class="card-body">
+                <h4 class="card-title">Los productos de {{request.user.profile.company.name}}</h4>
+                <div class="table-responsive pt-3">
+                    {% if productList %}
                     <table id="dataTable" class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -72,7 +92,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        {% for product in productList %}
+                            {% for product in productList %}
                             <tr>
                                 <td>{{ product.id }}</td>
                                 <td>{{ product.name }}</td>
@@ -84,35 +104,42 @@
                                         <a href="{% url 'products:profitsListAndCreate' %}?id={{product.id}}">
                                             <i class="mdi mdi-step-forward"></i>
                                         </a>
-                                    </p> 
+                                        <a href="#" data-href="{% url 'products:delete' product.id %}" data-toggle="modal" data-target="#confirm-delete" >
+                                            <i class="mdi mdi-delete"></i>
+                                        </a>
+                                    </p>
                                 </td>
                             </tr>
-                        {% endfor %}
+                            {% endfor %}
                         </tbody>
                     </table>
-                {% else %}
+                    {% else %}
                     <div class="alert alert-info" role="alert">
                         No tienes registrados productos
                     </div>
-                {% endif %}
+                    {% endif %}
+                </div>
             </div>
-        </div>
         </div>
     </div>
 </div>
-
-{% endblock %}
+{% endblock %} 
 
 {% block Js %}
-    <script src="{% static 'vendors/jquery/jquery.dataTables.min.js' %}"></script>
-    <script src="{% static 'vendors/jquery/dataTables.bootstrap.min.js' %}"></script>
-<script>   
+<script src="{% static 'vendors/jquery/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendors/jquery/dataTables.bootstrap.min.js' %}"></script>
+<script>
     $(document).ready(function() {
-        $('#dataTable').DataTable( {
+        $('#dataTable').DataTable({
             "language": {
                 "url": "{% static 'vendors/jquery/Spanish.json' %}"
             }
-        } );
-    } );
+        });
+    });
+</script>
+<script>
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
 </script>
 {% endblock %}

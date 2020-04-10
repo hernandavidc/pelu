@@ -2,14 +2,14 @@
 <nav class="bottom-navbar">
     <div class="container">
         <ul class="nav page-navigation">
-            <li class="nav-item active">
+            <li class="nav-item {% if 'inicio' in request.path %}active{% endif %}">
                 <a class="nav-link" href="{% url 'dashboard' %}">
                 <i class="mdi mdi-file-document-box menu-icon"></i>
                 <span class="menu-title">Inicio</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
+            <li class="nav-item {% if 'productos' in request.path %}active{% endif %}">
+                <a class="nav-link">
                     <i class="mdi mdi-cube-outline menu-icon"></i>
                     <span class="menu-title">Productos</span>
                     <i class="menu-arrow"></i>
@@ -21,21 +21,11 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="mdi mdi-codepen menu-icon"></i>
-                    <span class="menu-title">Sample Pages</span>
-                    <i class="menu-arrow"></i>
+            <li class="nav-item {% if 'ventas' in request.path %}active{% endif %}">
+                <a class="nav-link" href="{% url 'sales:ListAndCreate' %}">
+                <i class="mdi mdi-file-document-box menu-icon"></i>
+                <span class="menu-title">Ventas</span>
                 </a>
-                <div class="submenu">
-                    <ul class="submenu-item">
-                        <li class="nav-item"><a class="nav-link" href="pages/samples/login.html">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pages/samples/login-2.html">Login 2</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pages/samples/register.html">Register</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pages/samples/register-2.html">Register 2</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pages/samples/lock-screen.html">Lockscreen</a></li>
-                    </ul>
-                </div>
             </li>
             <li class="nav-item">
                 <a href="docs/documentation.html" class="nav-link">

@@ -31,11 +31,11 @@
     <div class="col-sm-12 col-md-5">
         {% if 'register' in request.GET  %}
             <div class="alert alert-success" role="alert">
-                El producto se registro correctamente
+                El beneficio se registro correctamente
             </div>
         {% elif 'error' in request.GET %}
             <div class="alert alert-danger" role="alert">
-                Error al registrar el producto
+                Error al realizar la acción
             </div>
         {% endif %}
     </div>
@@ -87,6 +87,27 @@
   </div>
 </div>
 
+<!-- Modal delete -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createProductModalLabel">Confirmar eliminar beneficio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Esta proximo a eliminar un beneficio, este procedimiento es irreversible.</p>
+                <p>¿Seguro que desea proceder?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-danger btn-ok">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row mt-4">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -116,6 +137,9 @@
                                 <td>
                                     <p style="text-align:center;">
                                         <a href="{% url 'products:profitsUpdate' profitproduct.id %}"><i class="mdi mdi-grease-pencil"></i></a>
+                                        <a href="#" data-href="{% url 'products:profitsDelete' profitproduct.id %}" data-toggle="modal" data-target="#confirm-delete" >
+                                            <i class="mdi mdi-delete"></i>
+                                        </a>
                                     </p> 
                                 </td>
                             </tr>
@@ -156,5 +180,10 @@
             }
         } );
     } );
+</script>
+<script>
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
 </script>
 {% endblock %}

@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from registration.models import Profile
 from .models import Product, ProfitProduct
-from .froms import ProductForm, ProfitProductForm
+from .forms import ProductForm, ProfitProductForm
 
 #Product Create lista los productos
 class ProductListAndCreate(CreateView):
@@ -39,6 +38,20 @@ class ProductUpdate(UpdateView):
             return super(UpdateView, self).get(request, *args, **kwargs)
         else:
             return redirect(reverse_lazy('products:ListAndCreate'))
+
+class ProductDelete(DeleteView):
+    model = Product
+    success_url = reverse_lazy('products:ListAndCreate')
+
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if Product.objects.get(id=kwargs['pk']).company == request.user.profile.company:
+            return self.delete(request, *args, **kwargs)
+        else:
+            return redirect(reverse_lazy('products:ListAndCreate') + '?error')
+        
 
 #ProfitProduct Create lista los beneficios de los colaboradores por producto
 class ProfitProductListAndCreate(CreateView):
@@ -90,3 +103,16 @@ class ProfitProductUpdate(UpdateView):
             return super(UpdateView, self).get(request, *args, **kwargs)
         else:
             return redirect(reverse_lazy('products:profitsListAndCreate'))
+
+class ProfitProductDelete(DeleteView):
+    model = ProfitProduct
+    success_url = reverse_lazy('products:profitsListAndCreate')
+
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if ProfitProduct.objects.get(id=kwargs['pk']).product.company == request.user.profile.company:
+            return self.delete(request, *args, **kwargs)
+        else:
+            return redirect(reverse_lazy('products:profitsListAndCreate') + '?error')
